@@ -105,7 +105,7 @@ func (w *Webhook) inject(request *admissionv1beta1.AdmissionRequest) (*admission
 	nsAnnotations := namespace.GetAnnotations()
 
 	configs := &pb.All{Global: globalConfig, Proxy: proxyConfig}
-	resourceConfig := inject.NewResourceConfig(configs).
+	resourceConfig := inject.NewResourceConfig(configs, inject.OriginWebhook).
 		WithOwnerRetriever(w.ownerRetriever(request.Namespace)).
 		WithNsAnnotations(nsAnnotations).
 		WithKind(request.Kind.Kind)
